@@ -1,0 +1,544 @@
+<link href="css/wizard/style.css" rel="stylesheet">
+<div class="main" ng-init="init()" id="cuestionario">
+    <div class="container">
+        <h2 class="text-center">Cuestionario NOM-035 </h2>
+        <form method="POST" id="signup-form" class="signup-form">
+            <h3>
+                <span class="title_text">Datos del trabajador</span>
+            </h3>
+            <fieldset>
+                <div class="fieldset-content">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="empresa" class="form-label">Lugar de trabajo</label>
+                            <select class="selectP" ng-model="respuestas.idEmpresa" ng-options="empresa.descripcion for empresa in empresas track by empresa.id" name="empresa" ng-change="seleccionarEmpresa()">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="correo" class="form-label">Correo Electrónico</label>
+                            <input type="email" name="correo" id="correo" placeholder="Correo Electrónico" ng-model="respuestas.correo" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="nombre" class="form-label">Nombre(s)</label>
+                            <input type="text" name="nombre" id="nombre" placeholder="Nombre(s)" ng-model="respuestas.nombre" onkeyup="this.value = this.value.toUpperCase();" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="apaterno" class="form-label">Apellido paterno</label>
+                            <input type="text" name="apaterno" id="apaterno" placeholder="Apellido paterno" ng-model="respuestas.apellidoPaterno" onkeyup="this.value = this.value.toUpperCase();" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="amaterno" class="form-label">Apellido materno</label>
+                            <input type="text" name="amaterno" id="amaterno" placeholder="Apellido materno" ng-model="respuestas.apellidoMaterno" onkeyup="this.value = this.value.toUpperCase();" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="nomina" class="form-label">Id RH</label>
+                            <input type="number" name="nomina" id="nomina" placeholder="No. de nómina" ng-model="respuestas.idNomina" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sexo" class="form-label">Sexo</label>
+                            <div class="form-radio">
+                                <div class="form-radio-item">
+                                    <div ng-repeat="sexo in genero">
+                                        <input type="radio" name="gender" value="{{sexo.Id}}" id="{{sexo.Id}}" ng-model="respuestas.sexo" />
+                                        <label for="{{sexo.Id}}"><i class="zmdi {{sexo.icono}} zmdi-hc-2x"></i></label>
+                                    </div>
+                                    <!-- <label>{{sexo.descripcion}}
+                                            <input type="radio" ng-model="sexo.cheked" name="{{sexo.Id}}" value="{{sexo.name}}" ng-checked="{{ documento.seleccion; documento.seleccion = true}}"/>
+                                        </label> -->
+                                    <!-- ng-init="(sexo.seleccion == 1)?sexo.seleccionado=true:sexo.seleccionado=false" -->
+                                    <!-- <input type="radio" ng-model="pruebaaaa" ng-value="{{sexo.Id}}" id="{{sexo.Id}}" ng-checked="sexo.Id"/>
+                                        <label><i class="zmdi {{sexo.icono}} zmdi-hc-2x"></i></label> -->
+                                    <!-- </div> -->
+                                    <!--  -->
+                                    <!--  <input type="radio" name="gender" value="masculino" id="masculino" />
+                                        <label for="masculino"><i class="zmdi zmdi-male-alt zmdi-hc-2x"></i></label>
+                                        <input type="radio" name="gender" value="femenino" id="femenino" />
+                                        <label for="femenino"><i class="zmdi zmdi-female zmdi-hc-2x"></i></label> -->
+                                    <!--  -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="edad" class="form-label">Edad en años</label>
+                            <select class="selectP" name="edad" ng-model="respuestas.idEdad" ng-options="edad.descripcion for edad in edadAnios track by edad.id">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="estadoCivil" class="form-label">Estado civil</label>
+                            <select class="selectP" ng-model="respuestas.idEstadoCivil" ng-options="estado.descripcion for estado in estadosCivil track by estado.id" name="estadoCivil">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="nivelEstudio" class="form-label">Nivel de estudios</label>
+                            <select class="selectP" ng-model="respuestas.idNivelEstudios" ng-options="nivel.descripcion for nivel in nivelEstudios track by nivel.id" name="nivelEstudio">
+                                <option value="">Seleccione</option>
+                            </select>
+                            <!-- <div class="form-radio">
+                                <div class="form-radio-item">
+                                    <input type="radio" name="termino" value="1" id="teminada" ng-model="terminada"/>
+                                    <label for="teminada">Terminada</label>
+                                    <input type="radio" name="termino" value="0" id="incompleta" ng-model="terminada"/>
+                                    <label for="incompleta">Incompleta</label>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="" class="form-label"></label>
+                            <div class="form-radio">
+                                <div class="form-radio-item">
+                                    <input type="radio" name="termino" value="1" id="teminada" ng-model="terminada" />
+                                    <label for="teminada">Terminada</label>
+                                    <input type="radio" name="termino" value="0" id="incompleta" ng-model="terminada" />
+                                    <label for="incompleta">Incompleta</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="ocupacion" class="form-label">Ocupación/ profesión/ puesto</label>
+                            <input type="text" name="ocupacion" id="ocupacion" placeholder="Ocupacion/Sección/Área" ng-model="respuestas.profesion" onkeyup="this.value = this.value.toUpperCase();" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="departamento" class="form-label">Área</label>
+                            <input type="text" name="departamento" id="departamento" placeholder="Área" ng-model="respuestas.departamento" onkeyup="this.value = this.value.toUpperCase();" />
+                        </div>
+                        <!-- <div class="form-group col-md-4">
+                            <label for="departamento" class="form-label">Departamento/ sección/ área</label>
+                            <select class="selectP" ng-model="respuestas.idDepartamento" ng-options="departamento.descripcion for departamento in departamentos track by departamento.id" name="departamento">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div> -->
+                        <div class="form-group col-md-4">
+                            <label for="jornada" class="form-label">Tipo de jornada de trabajo</label>
+                            <select class="selectP" ng-model="respuestas.idTipoJornada" ng-options="tipoJornada.descripcion for tipoJornada in tiposJornada track by tipoJornada.id" name="jornada">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group col-md-4">
+                            <label for="puesto" class="form-label">Tipo de puesto</label>
+                            <select class="selectP" ng-model="respuestas.idTipoPuesto" ng-options="puesto.descripcion for puesto in puestos track by puesto.id" name="puesto">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div> -->
+                    </div>
+                    <div class="row">
+                        <!-- <div class="form-group col-md-4">
+                            <label for="contratacion" class="form-label">Tipo de contratación</label>
+                            <select class="selectP" ng-model="respuestas.idTipoContratacion" ng-options="contratacion.descripcion for contratacion in contrataciones track by contratacion.id" name="contratacion">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div> -->
+                        <!-- <div class="form-group col-md-4">
+                            <label for="personal" class="form-label">Tipo de personal</label>
+                            <select class="selectP" ng-model="respuestas.idTipoPersonal" ng-options="tipoPersonal.descripcion for tipoPersonal in tiposPersonal track by tipoPersonal.id" name="personal">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div> -->
+                        <!-- <div class="form-group col-md-4">
+                            <label for="jornada" class="form-label">Tipo de jornada de trabajo</label>
+                            <select class="selectP" ng-model="respuestas.idTipoJornada" ng-options="tipoJornada.descripcion for tipoJornada in tiposJornada track by tipoJornada.id" name="jornada">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="rotacion" class="form-label">Realiza rotación de turnos</label>
+                            <select class="selectP" ng-model="respuestas.idRotacionTurnos" ng-options="rotacionTurno.descripcion for rotacionTurno in rotacionTurnos track by rotacionTurno.id" name="rotacion">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" name="telefono" id="telefono" placeholder="Teléfono" ng-model="respuestas.telefono" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="10" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="celular" class="form-label">Tel. Cel.</label>
+                            <input type="text" name="celular" id="celular" placeholder="Teléfono Celular" ng-model="respuestas.celular" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="10" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="subtitulo"><strong>Experiencia(años)</strong></label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="puestoActual" class="form-label">Tiempo en el puesto actual</label>
+                            <select class="selectP" ng-model="respuestas.idExpPuestoActual" ng-options="experienciaActual.descripcion for experienciaActual in experienciaActuales track by experienciaActual.id" name="puestoActual">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="experienciaLaboral" class="form-label">Tiempo experiencia laboral</label>
+                            <select class="selectP" ng-model="respuestas.idExpLaboral" ng-options="experienciaLaboral.descripcion for experienciaLaboral in experienciaLaborales track by experienciaLaboral.id" name="experienciaLaboral">
+                                <option value="">Seleccione</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="obligatorio"><strong>* Campos Obligatorios</strong></div>
+                        </div>
+                        <!-- <input type="text" name="valida" id="valida"  ng-model="valida"  /> -->
+                    </div>
+                </div>
+                <div class="fieldset-footer">
+                    <span>Paso 1 de 2</span>
+                </div>
+            </fieldset>
+            <h3>
+                <span class="title_text">Cuestionario I</span>
+            </h3>
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="titulo"><strong>{{titulo1}}</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="titulo"><strong>Selecciona la respuesta de acuerdo a cada pregunta.</strong></p>
+                    </div>
+                </div>
+                <div class="fieldset-content">
+                    <div class="panel panel-info" ng-repeat="titulo in cuestionario1" ng-show="titulo.mostrar">
+                        <div class="panel-heading">
+                            <p class="panel-title">{{titulo.tituloSeccion}}</p>
+                        </div>
+                        <div ng-show="titulo.tituloSeccion == 'I.- Acontecimiento traumático severo'">
+                            <p class="panel-title"> ¿Ha presenciado o sufrido alguna vez, durante o con motivo del
+                                trabajo un acontecimiento como los siguientes?:</p>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" rowspan="2">Pregunta</th>
+                                            <th class="text-center" colspan="2">Respuesta</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center">Sí</th>
+                                            <th class="text-center">No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="pregunta in titulo.contenido">
+                                            <td>{{pregunta.descripcionPregunta}}</td>
+                                            <td class="text-center"><button ng-hide="pregunta.respuestaSI" class="btn btn-default" ng-click="pregunta.respuestaSI = 1; pregunta.respuestaNo = 0; muestraCuestionarios()"></button>{{pregunta.respuestaSI == 1 ? 'Sí' : ''}}
+                                            </td>
+                                            <td class="text-center"><button ng-hide="pregunta.respuestaNo " class="btn btn-default" ng-click="pregunta.respuestaNo = 1; pregunta.respuestaSI = 0; verificaCuestionarios()"></button>{{pregunta.respuestaNo == 1 ? 'No' : ''}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fieldset-footer">
+                    <span>Paso 2 de 3</span>
+                </div>
+            </fieldset>
+            <h3>
+                <span class="title_text">Cuestionario II</span>
+            </h3>
+            <fieldset>
+                <div ng-hide="ocultaC2">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="titulo"><strong>{{titulo2}}</strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="titulo"><strong>Selecciona la respuesta de acuerdo a cada pregunta.</strong></p>
+                        </div>
+                    </div>
+                    <div class="fieldset-content">
+                        <div class="panel panel-info" ng-repeat="titulo in cuestionario2" ng-show="titulo.mostrar">
+                            <div class="panel-heading">
+                                <p class="panel-title">{{titulo.tituloSeccion}}</p>
+                            </div>
+                            <div ng-show="titulo.tituloSeccion == 'Las preguntas siguientes están relacionadas con la atención a clientes y usuarios.'" class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" rowspan="2">Pregunta</th>
+                                                <th class="text-center" colspan="2">Respuesta</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-center">Sí</th>
+                                                <th class="text-center">No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>En mi trabajo debo brindar servicio a clientes o usuarios:</td>
+                                                <td class="text-center"><button ng-hide="atencionC2.respuestaSI" class="btn btn-default" ng-click="atencionC2.respuestaSI = 1; atencionC2.respuestaNo = 0; muestraPreguntasAtencionC2(1) "></button>{{atencionC2.respuestaSI == 1 ? 'Sí' : ''}}
+                                                </td>
+                                                <td class="text-center"><button ng-hide="atencionC2.respuestaNo " class="btn btn-default" ng-click="atencionC2.respuestaNo = 1; atencionC2.respuestaSI = 0; muestraPreguntasAtencionC2(0)"></button>{{atencionC2.respuestaNo == 1 ? 'No' : ''}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="titulo.tituloSeccion == 'Las siguientes preguntas están relacionadas con las actitudes de los trabajadores que supervisa.'" class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" rowspan="2">Pregunta</th>
+                                                <th class="text-center" colspan="2">Respuesta</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-center">Sí</th>
+                                                <th class="text-center">No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Soy jefe de otros trabajadores:</td>
+                                                <td class="text-center"><button ng-hide="jefeC2.respuestaSI" class="btn btn-default" ng-click="jefeC2.respuestaSI = 1; jefeC2.respuestaNo = 0;muestraPreguntasjefeC2(1) "></button>{{jefeC2.respuestaSI == 1 ? 'Sí' : ''}}
+                                                </td>
+                                                <td class="text-center"><button ng-hide="jefeC2.respuestaNo " class="btn btn-default" ng-click="jefeC2.respuestaNo = 1; jefeC2.respuestaSI = 0;muestraPreguntasjefeC2(0)"></button>{{jefeC2.respuestaNo == 1 ? 'No' : ''}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- <div ng-show="titulo.tituloSeccion == 'I.- Acontecimiento traumático severo'" >
+                                                <p class="panel-title"> ¿Ha presenciado o sufrido alguna vez, durante o con motivo del trabajo un acontecimiento como los siguientes?:</p>
+                                            </div> -->
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" rowspan="2">Pregunta</th>
+                                                <th class="text-center" colspan="5">Respuesta</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-center">Siempre</th>
+                                                <th class="text-center">Casi siempre</th>
+                                                <th class="text-center">Algunas veces</th>
+                                                <th class="text-center">Casi nunca</th>
+                                                <th class="text-center">Nunca</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="pregunta in titulo.contenido">
+                                                <td ng-hide="pregunta.ocultar">{{pregunta.descripcionPregunta}}</td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.siempre" class="btn btn-default" ng-click="pregunta.siempre = 1;pregunta.casiSiempre = 0;pregunta.algunasVeces = 0;pregunta.casiNunca = 0; pregunta.nunca = 0; "></button>{{pregunta.siempre == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.casiSiempre" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 1;pregunta.algunasVeces = 0;pregunta.casiNunca = 0; pregunta.nunca = 0; "></button>{{pregunta.casiSiempre == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.algunasVeces" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 0;pregunta.algunasVeces = 1;pregunta.casiNunca = 0; pregunta.nunca = 0; "></button>{{pregunta.algunasVeces == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.casiNunca" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 0;pregunta.algunasVeces = 0;pregunta.casiNunca = 1; pregunta.nunca = 0; "></button>{{pregunta.casiNunca == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.nunca" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 0;pregunta.algunasVeces = 0;pregunta.casiNunca = 0; pregunta.nunca = 1; "></button>{{pregunta.nunca == 1 ? 'X' : ''}}
+                                                </td>
+                                                <!-- <td class="text-center"><button  class="btn btn-default" ng-click="pregunta.respuestaNo = 1; pregunta.respuestaSI = 0; verificaCuestionarios()"></button>{{pregunta.respuestaNo == 1 ? 'No' : ''}}</td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="ocultaC2">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="titulo"><strong>CUESTIONARIO NO DISPONIBLE</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fieldset-footer">
+                    <span>Paso 3 de 4</span>
+                </div>
+            </fieldset>
+            <h3>
+                <span class="title_text">Cuestionario III</span>
+            </h3>
+            <fieldset>
+                <div ng-hide="ocultaC3">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="titulo"><strong>{{titulo2}}</strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="titulo"><strong>Selecciona la respuesta de acuerdo a cada pregunta.</strong></p>
+                        </div>
+                    </div>
+                    <div class="fieldset-content">
+                        <div class="panel panel-info" ng-repeat="titulo in cuestionario3" ng-show="titulo.mostrar">
+                            <div class="panel-heading">
+                                <p class="panel-title">{{titulo.tituloSeccion}}</p>
+                            </div>
+                            <div ng-show="titulo.tituloSeccion == 'Las preguntas siguientes están relacionadas con la atención a clientes y usuarios.'" class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" rowspan="2">Pregunta</th>
+                                                <th class="text-center" colspan="2">Respuesta</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-center">Sí</th>
+                                                <th class="text-center">No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td> En mi trabajo debo brindar servicio a clientes o usuarios:</td>
+                                                <td class="text-center"><button ng-hide="atencionC3.respuestaSI" class="btn btn-default" ng-click="atencionC3.respuestaSI = 1; atencionC3.respuestaNo = 0;muestraPreguntasAtencionC3(1) "></button>{{atencionC3.respuestaSI == 1 ? 'Sí' : ''}}
+                                                </td>
+                                                <td class="text-center"><button ng-hide="atencionC3.respuestaNo " class="btn btn-default" ng-click="atencionC3.respuestaNo = 1; atencionC3.respuestaSI = 0;muestraPreguntasAtencionC3(0)"></button>{{atencionC3.respuestaNo == 1 ? 'No' : ''}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div ng-show="titulo.tituloSeccion == 'Las preguntas siguientes están relacionadas con las actitudes de las personas que supervisa.'" class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" rowspan="2">Pregunta</th>
+                                                <th class="text-center" colspan="2">Respuesta</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-center">Sí</th>
+                                                <th class="text-center">No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Soy jefe de otros trabajadores:</td>
+                                                <td class="text-center"><button ng-hide="jefeC3.respuestaSI" class="btn btn-default" ng-click="jefeC3.respuestaSI = 1; jefeC3.respuestaNo = 0; muestraPreguntasjefeC3(1) "></button>{{jefeC3.respuestaSI == 1 ? 'Sí' : ''}}
+                                                </td>
+                                                <td class="text-center"><button ng-hide="jefeC3.respuestaNo " class="btn btn-default" ng-click="jefeC3.respuestaNo = 1; jefeC3.respuestaSI = 0;muestraPreguntasjefeC3(0)"></button>{{jefeC3.respuestaNo == 1 ? 'No' : ''}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" rowspan="2">Pregunta</th>
+                                                <th class="text-center" colspan="5">Respuesta</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="text-center">Siempre</th>
+                                                <th class="text-center">Casi siempre</th>
+                                                <th class="text-center">Algunas veces</th>
+                                                <th class="text-center">Casi nunca</th>
+                                                <th class="text-center">Nunca</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="pregunta in titulo.contenido">
+                                                <td ng-hide="pregunta.ocultar">{{pregunta.descripcionPregunta}}</td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.siempre" class="btn btn-default" ng-click="pregunta.siempre = 1;pregunta.casiSiempre = 0;pregunta.algunasVeces = 0;pregunta.casiNunca = 0; pregunta.nunca = 0; "></button>{{pregunta.siempre == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.casiSiempre" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 1;pregunta.algunasVeces = 0;pregunta.casiNunca = 0; pregunta.nunca = 0; "></button>{{pregunta.casiSiempre == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.algunasVeces" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 0;pregunta.algunasVeces = 1;pregunta.casiNunca = 0; pregunta.nunca = 0; "></button>{{pregunta.algunasVeces == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.casiNunca" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 0;pregunta.algunasVeces = 0;pregunta.casiNunca = 1; pregunta.nunca = 0; "></button>{{pregunta.casiNunca == 1 ? 'X' : ''}}
+                                                </td>
+                                                <td ng-hide="pregunta.ocultar" class="text-center"><button ng-hide="pregunta.nunca" class="btn btn-default" ng-click="pregunta.siempre = 0;pregunta.casiSiempre = 0;pregunta.algunasVeces = 0;pregunta.casiNunca = 0; pregunta.nunca = 1; "></button>{{pregunta.nunca == 1 ? 'X' : ''}}
+                                                </td>
+                                                <!-- <td class="text-center"><button  class="btn btn-default" ng-click="pregunta.respuestaNo = 1; pregunta.respuestaSI = 0; verificaCuestionarios()"></button>{{pregunta.respuestaNo == 1 ? 'No' : ''}}</td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="ocultaC3">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="titulo"><strong>CUESTIONARIO NO DISPONIBLE</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fieldset-footer">
+                    <span>Paso 4 de 4</span>
+                </div>
+            </fieldset>
+            <!-- <h3>
+                    <span class="title_text">Cuestionario 2</span>
+                </h3>
+                <fieldset>
+                    <div class="fieldset-content">
+                        <div class="form-radio">
+                            <label for="payment_type">Payment Type</label>
+                            <div class="form-radio-flex">
+                                <input type="radio" name="payment_type" id="payment_visa" value="payment_visa" checked="checked" />
+                                <label for="payment_visa"><img src="images/icon-visa.png" alt=""></label>
+                                <input type="radio" name="payment_type" id="payment_master" value="payment_master" />
+                                <label for="payment_master"><img src="images/icon-master.png" alt=""></label>
+                                <input type="radio" name="payment_type" id="payment_paypal" value="payment_paypal" />
+                                <label for="payment_paypal"><img src="images/icon-paypal.png" alt=""></label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="credit_card" class="form-label">Credit Card</label>
+                                <input type="text" name="credit_card" id="credit_card" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cvc" class="form-label">CVC</label>
+                                <input type="text" name="cvc" id="cvc" />
+                            </div>
+                        </div>
+                        <div class="form-date">
+                            <label for="expiry_date">Expiration Date</label>
+                            <div class="form-flex">
+                                <div class="form-date-item">
+                                    <select id="expiry_date" name="expiry_date"></select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                                <div class="form-date-item">
+                                    <select id="expiry_year" name="expiry_year"></select>
+                                    <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name_of_card" class="form-label">Name of card</label>
+                            <input type="text" name="name_of_card" id="name_of_card" />
+                        </div>
+                    </div>
+                    <div class="fieldset-footer">
+                        <span>Step 3 of 3</span>
+                    </div>
+                </fieldset> -->
+        </form>
+    </div>
+</div>
+<script src="js/wizard/main.js"></script>

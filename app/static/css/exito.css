@@ -1,0 +1,14 @@
+.iconoExito {
+    font-size: 120px;
+    color: #86b386;
+}
+
+.iconoError {
+    font-size: 120px;
+    color: red;
+}
+
+
+.space-top {
+    margin-top: 50px;
+}

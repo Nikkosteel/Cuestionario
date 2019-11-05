@@ -1,0 +1,11 @@
+{
+    "port": 9999,
+    "SQL_user": "sa",
+    "SQL_password": "S0p0rt3",
+    "SQL_server": "192.168.20.92",
+    "SQL_database": "RecursosHumanos",
+    "SQL_connectionTimeout": 60000,
+    "SQL_requestTimeout": 300000,
+    "rutaActivaCuenta": "http://localhost:9999/"
+
+}

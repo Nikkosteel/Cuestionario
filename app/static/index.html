@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Encuesta</title>
+    <meta name="description" content="description project">
+    <meta name="author" content="name" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <!--Hojas de estilos-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/toastr.css" rel="stylesheet" />
+    <link href="css/spinner/spinner.css" rel="stylesheet">
+    <link href="css/datepicker3.css" rel="stylesheet">
+    <link href="css/nifty.min.css" rel="stylesheet">
+    <link href="css/tab.css" rel="stylesheet">
+    <link href="css/demo/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="css/demo/nifty-demo.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/themify-icons/themify-icons.min.css">
+    <link href="plugins/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="plugins/datatables/extensions/Responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <link href="plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!--Morris.js [ OPTIONAL ]-->
+    <link href="plugins/morris-js/morris.min.css" rel="stylesheet">
+    <!-- c3 Charts -->
+    <link href="css/c3/c3.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/wizard/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body ng-app="registrationModule" ng-controller="mainController" ng-init="init()">
+    <loading></loading>
+    <div id="container" class="effect aside-float aside-bright mainnav-sm">
+        <div id="content-container" style="padding-top: 0px !important">
+            <div ui-view="encuesta"></div>
+            <div ui-view="menu"></div>
+            <div ui-view="login"></div>
+        </div>
+    </div>
+    <!--Interface de usuario-->
+    <!-- Librerias Angular-->
+    <script src="js/tab.js"></script>
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/libs/angular/angular.min.js"></script>
+    <script src="js/libs/angular/angular-route.min.js"></script>
+    <script src="/js/ui-router/angular-ui-router.min.js"></script>
+    <script src="js/libs/angular/angular-local-storage.min.js"></script>
+    <!-- wizard -->
+    <script src="js/wizard/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="js/wizard/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="js/wizard/jquery-steps/jquery.steps.min.js"></script>
+    <script src="js/wizard/minimalist-picker/dobpicker.js"></script>
+    <script src="js/wizard/jquery.pwstrength/jquery.pwstrength.js"></script>
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/libs/toastr/toastr.min.js"></script>
+    <script src="js/demo/ui-panels.js"></script>
+    <script src="js/datatables.min.js"></script>
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="js/nifty.min.js"></script>
+    <link href="plugins/pace/pace.min.css" rel="stylesheet">
+    <script src="plugins/pace/pace.min.js"></script>
+    <script src="js/demo/nifty-demo.min.js"></script>
+    <script src="js/vfs_fonts.js"></script>
+    <script src="js/ui-grid.js"></script>
+    <link rel="stylesheet" href="css/ui-grid.css" type="text/css">
+    <!--Responsive table-->
+    <script src="plugins/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+    <script src="plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="js/demo/tables-datatables.js"></script>
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <script src="plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <script src="plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!--Morris.js [ OPTIONAL ]-->
+    <script src="plugins/morris-js/morris.min.js"></script>
+    <script src="plugins/morris-js/raphael-js/raphael.min.js"></script>
+    <!-- d3 and c3 charts -->
+    <script src="js/d3/d3.min.js"></script>
+    <script src="js/c3/c3.min.js"></script>
+    <!-- ChartJS-->
+    <!-- <script src="plugins/chartJs/Chart.min.js"></script> -->
+    <script src="plugins/chartJs/Chart.min.js"></script>
+    <!--Funciones Comunes-->
+    <script src="confront.js"></script>
+    <script src="helpers.js"></script>
+    <!--Librerias de aplicación angular-->
+    <script src="AngularJS/registrationModule.js"></script>
+    <!--librerias de componenetes-->
+    <script src="AngularJS/alertFactory.js"></script>
+    <script src="AngularJS/userFactory.js"></script>
+    <script src="AngularJS/filterFactory.js"></script>
+    <script src="AngularJS/commonDirective.js"></script>
+    <script src="AngularJS/globalFactory.js"></script>
+    <script src="AngularJS/utils.js"></script>
+    <!--Controllers-->
+    <script src="AngularJS/Main/mainController.js"></script>
+    <script src="AngularJS/login/loginController.js"></script>
+    <script src="AngularJS/login/loginRepository.js"></script>
+    <script src="AngularJS/encuesta/encuestaController.js"></script>
+    <script src="AngularJS/encuesta/encuestaRepository.js"></script>
+    <script src="AngularJS/validar/userController.js"></script>
+    <script src="AngularJS/validar/userRepository.js"></script>
+    <script src="AngularJS/menu/menuController.js"></script>
+    <script src="AngularJS/menu/pruebaController.js"></script>
+</body>
+
+</html>

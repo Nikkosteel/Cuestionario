@@ -1,0 +1,10 @@
+.cabecera{
+	background-color: #004482;	
+}
+.imgLogo{
+	height: 30px;
+}
+.divImg {
+    float: left;
+    padding: 20px;
+}
