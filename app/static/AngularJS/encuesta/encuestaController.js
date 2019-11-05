@@ -7,7 +7,6 @@ registrationModule.controller('encuestaController', function ($scope, $rootScope
     $scope.ocultaC2 = true;
     $scope.ocultaC3 = true;
     $scope.vacio = true;
-    $rootScope.ocultarHeader = false;
     $scope.init = function () {
         getSexo();
         getEdadAnios();
@@ -227,8 +226,23 @@ registrationModule.controller('encuestaController', function ($scope, $rootScope
             angular.forEach($scope.cuestionario1, function (value, key) {
                 if (key > 0) {
                     $scope.cuestionario1[key].mostrar = false;
+                    var indice = key;
+                    angular.forEach($scope.cuestionario1[indice].contenido, function (value1, key1) {
+                       
+                        value1.respuestaNo = null;
+                        value1.respuestaSI = null;
+                            
+                      
+                    });
+
+
+
                 }
             });
+
+           
+
+
         }
     };
     $scope.muestraCuestionarios = function () {
@@ -238,90 +252,100 @@ registrationModule.controller('encuestaController', function ($scope, $rootScope
         });
     };
     $scope.guardar = function () {
-        console.log('SERA QUE FUNCIONA ASI ????');
-        console.log($scope.respuestas);
-        $scope.respuestas.idCuestionario = $scope.numCustionario;
-        $scope.respuestas.terminadoNivel = $scope.terminada;
-        var preguntas;
-        var preguntas2;
-        var preguntas3;
-        var respuestas1 = '';
-        var respuestas2 = '';
-        var respuestas3 = '';
-        angular.forEach($scope.cuestionario1, function (value, key) {
-            preguntas = value.contenido;
-            angular.forEach(preguntas, function (value, key) {
-                console.log(value.idPregunta);
-                $scope.respuestas['respuesta' + value.idPregunta] = value.respuestaSI == null ? value.respuestaSI : (value.respuestaSI == 1 ? 1 : 0);
 
-
+        if(validaCuestionarioIII()){
+            console.log('SERA QUE FUNCIONA ASI ????');
+            console.log($scope.respuestas);
+            $scope.respuestas.idCuestionario = $scope.numCustionario;
+            $scope.respuestas.terminadoNivel = $scope.terminada;
+            var preguntas;
+            var preguntas2;
+            var preguntas3;
+            var respuestas1 = '';
+            var respuestas2 = '';
+            var respuestas3 = '';
+    
+    
+            angular.forEach($scope.cuestionario1, function (value, key) {
+                preguntas = value.contenido;
+                angular.forEach(preguntas, function (value, key) {
+                    console.log(value.idPregunta);
+                    $scope.respuestas['respuesta' + value.idPregunta] = value.respuestaSI == null ? value.respuestaSI : (value.respuestaSI == 1 ? 1 : 0);
+    
+    
+                });
             });
-        });
-        angular.forEach($scope.cuestionario2, function (value, key) {
-            preguntas2 = value.contenido;
-
-            angular.forEach(preguntas2, function (value, key) {
-                console.log(value.idPregunta);
-
-                if (value.siempre == 1) {
-                    respuestas2 = respuestas2 + value.idPregunta.toString() + ",1|";
-                } else if (value.casiSiempre == 1) {
-                    respuestas2 = respuestas2 + value.idPregunta.toString() + ",2|";
-                } else if (value.algunasVeces == 1) {
-                    respuestas2 = respuestas2 + value.idPregunta.toString() + ",3|";
-                } else if (value.casiNunca == 1) {
-                    respuestas2 = respuestas2 + value.idPregunta.toString() + ",4|";
-                } else if (value.nunca == 1) {
-                    respuestas2 = respuestas2 + value.idPregunta.toString() + ",5|";
+            angular.forEach($scope.cuestionario2, function (value, key) {
+                preguntas2 = value.contenido;
+    
+                angular.forEach(preguntas2, function (value, key) {
+                    console.log(value.idPregunta);
+    
+                    if (value.siempre == 1) {
+                        respuestas2 = respuestas2 + value.idPregunta.toString() + ",1|";
+                    } else if (value.casiSiempre == 1) {
+                        respuestas2 = respuestas2 + value.idPregunta.toString() + ",2|";
+                    } else if (value.algunasVeces == 1) {
+                        respuestas2 = respuestas2 + value.idPregunta.toString() + ",3|";
+                    } else if (value.casiNunca == 1) {
+                        respuestas2 = respuestas2 + value.idPregunta.toString() + ",4|";
+                    } else if (value.nunca == 1) {
+                        respuestas2 = respuestas2 + value.idPregunta.toString() + ",5|";
+                    } else {
+                        respuestas2 = respuestas2 + value.idPregunta.toString() + ",0|";
+    
+                    }
+    
+    
+                    //$scope.respuestas2['respuesta' + value.idPregunta] = value.respuestaSI == null ? value.respuestaSI : (value.respuestaSI == 1 ? 1 : 0);
+                });
+            });
+            angular.forEach($scope.cuestionario3, function (value, key) {
+                preguntas3 = value.contenido;
+    
+                angular.forEach(preguntas3, function (value, key) {
+                    console.log(value.idPregunta);
+    
+                    if (value.siempre == 1) {
+                        respuestas3 = respuestas3 + value.idPregunta.toString() + ",1|";
+                    } else if (value.casiSiempre == 1) {
+                        respuestas3 = respuestas3 + value.idPregunta.toString() + ",2|";
+                    } else if (value.algunasVeces == 1) {
+                        respuestas3 = respuestas3 + value.idPregunta.toString() + ",3|";
+                    } else if (value.casiNunca == 1) {
+                        respuestas3 = respuestas3 + value.idPregunta.toString() + ",4|";
+                    } else if (value.nunca == 1) {
+                        respuestas3 = respuestas3 + value.idPregunta.toString() + ",5|";
+                    } else {
+                        respuestas3 = respuestas3 + value.idPregunta.toString() + ",0|";
+    
+                    }
+    
+    
+                    //$scope.respuestas2['respuesta' + value.idPregunta] = value.respuestaSI == null ? value.respuestaSI : (value.respuestaSI == 1 ? 1 : 0);
+                });
+            });
+    
+            encuestaRepository.postRespuestas($scope.respuestas, respuestas2, respuestas3).then(function success(res) {
+                console.log(res.data[0].result);
+                if (res.data[0].result == 1) {
+                    location.href = '/exito';
+                } else if (res.data[0].result == 0) {
+                    error(res.data[0].msg);
                 } else {
-                    respuestas2 = respuestas2 + value.idPregunta.toString() + ",0|";
-
+                    error('Ocurrio un problema');
                 }
-
-
-                //$scope.respuestas2['respuesta' + value.idPregunta] = value.respuestaSI == null ? value.respuestaSI : (value.respuestaSI == 1 ? 1 : 0);
+            }, function error(err) {
+                error(err);
             });
-        });
-        angular.forEach($scope.cuestionario3, function (value, key) {
-            preguntas3 = value.contenido;
+    
+    
+    
+            console.log(respuestas2, "respuestas2");
+            console.log(respuestas3, "respuestas3");
+        }
 
-            angular.forEach(preguntas3, function (value, key) {
-                console.log(value.idPregunta);
-
-                if (value.siempre == 1) {
-                    respuestas3 = respuestas3 + value.idPregunta.toString() + ",1|";
-                } else if (value.casiSiempre == 1) {
-                    respuestas3 = respuestas3 + value.idPregunta.toString() + ",2|";
-                } else if (value.algunasVeces == 1) {
-                    respuestas3 = respuestas3 + value.idPregunta.toString() + ",3|";
-                } else if (value.casiNunca == 1) {
-                    respuestas3 = respuestas3 + value.idPregunta.toString() + ",4|";
-                } else if (value.nunca == 1) {
-                    respuestas3 = respuestas3 + value.idPregunta.toString() + ",5|";
-                } else {
-                    respuestas3 = respuestas3 + value.idPregunta.toString() + ",0|";
-
-                }
-
-
-                //$scope.respuestas2['respuesta' + value.idPregunta] = value.respuestaSI == null ? value.respuestaSI : (value.respuestaSI == 1 ? 1 : 0);
-            });
-        });
-
-        encuestaRepository.postRespuestas($scope.respuestas, respuestas2, respuestas3).then(function success(res) {
-            console.log(res.data[0].result);
-            if (res.data[0].result == 1) {
-                location.href = '/exito';
-            } else if (res.data[0].result == 0) {
-                error(res.data[0].msg);
-            } else {
-                error('Ocurrio un problema');
-            }
-        }, function error(err) {
-            error(err);
-        });
-        console.log(respuestas2, "respuestas2");
-        console.log(respuestas3, "respuestas3");
+       
     };
 
 
@@ -460,6 +484,88 @@ registrationModule.controller('encuestaController', function ($scope, $rootScope
             $scope.vacio = false;
         }
 
+    };
+    $scope.validaCuestionarioII = function() {
+        var contenido;
+        var contador = 0;
+        if($scope.ocultaC2){
+            return true;
+        }else{
+            angular.forEach($scope.cuestionario2, function(value, key) {
+                contenido = value.contenido;
+                angular.forEach(contenido, function(value, key) {
+                    if (value.ocultar == false) {
+                        if (!value.algunasVeces && !value.casiNunca && !value.casiSiempre && !value.nunca && !value.siempre) {
+                            contador++;
+                        }
+                    }
+                });
+            });
+            if (contador > 0) {
+                alertFactory.error('Es necesario llenar todas las respuestas');
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+      
+    };
+    var validaCuestionarioIII = function() {
+        var contenido;
+        var contador = 0;
+        if($scope.ocultaC3){
+            return true;
+        }else{
+            angular.forEach($scope.cuestionario3, function(value, key) {
+                contenido = value.contenido;
+                angular.forEach(contenido, function(value, key) {
+                    if (value.ocultar == false) {
+                        if (!value.algunasVeces && !value.casiNunca && !value.casiSiempre && !value.nunca && !value.siempre) {
+                            contador++;
+                        }
+                    }
+                });
+            });
+            if (contador > 0) {
+                alertFactory.error('Es necesario llenar todas las respuestas');
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+    };
+
+    $scope.validaCuestionarioI = function() {
+        var contenido;
+        var contador = 0;
+      
+            angular.forEach($scope.cuestionario1, function(value, key) {
+                contenido = value.contenido;
+                if(value.mostrar){
+                    angular.forEach(contenido, function(value, key) {
+                      
+
+                        
+                            if (!value.respuestaNo && !value.respuestaSI) {
+                                contador++;
+                            }
+                      
+                    });
+
+                }
+
+               
+            });
+            if (contador > 0) {
+                alertFactory.error('Es necesario llenar todas las respuestas');
+                return false;
+            } else {
+                return true;
+            }
+
+       
     };
 
 

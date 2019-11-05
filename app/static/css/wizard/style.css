@@ -1059,3 +1059,13 @@ fieldset {
     width:830px;
     
 }
+.panel-title {
+    font-weight: 600;
+    padding: 0 20px 0 20px;
+    font-size: 1.2em;
+    line-height: normal !important;
+     white-space: normal !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 7px;
+}

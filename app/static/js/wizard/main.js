@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
     var form = $("#signup-form");
     form.validate({
@@ -47,18 +47,21 @@
             },
             correo:{
                 required: true
+            },
+            telefono:{
+                required: true
             }
             // , 
             // valida:{
             //     required: true
             // }
         },
-        messages : {
+        messages: {
             estadoCivil: {
                 estadoCivil: 'Not a valid email address <i class="zmdi zmdi-info"></i>'
             }
         },
-        onfocusout: function(element) {
+        onfocusout: function (element) {
             $(element).valid();
         },
     });
@@ -73,24 +76,36 @@
             current: ''
         },
         titleTemplate: '<div class="title"><span class="number">#index#</span>#title#</div>',
-        onStepChanging: function(event, currentIndex, newIndex) {
+        onStepChanging: function (event, currentIndex, newIndex) {
             // angular.element('#cuestionario').scope().validaEmpleado();
             // alert( angular.element("#valida").val());
-           
+
             form.validate().settings.ignore = ":disabled,:hidden";
             // if( angular.element("#valida").val()==''){
             //     return false;
             // }
             // console.log(form.steps("getCurrentIndex"));
-            return form.valid();
+            // return form.valid();
+            if (currentIndex == 2 && newIndex == 3) {
+                var respuesta = angular.element('#cuestionario').scope().validaCuestionarioII();
+                angular.element('#cuestionario').scope().$apply();
+                return respuesta;
+            } else  if (currentIndex == 1 && newIndex == 2) {
+                var respuesta = angular.element('#cuestionario').scope().validaCuestionarioI();
+                angular.element('#cuestionario').scope().$apply();
+                return respuesta;
+            }else {
+                return form.valid();
+            }
         },
-        onFinishing: function(event, currentIndex) {
-          
+        onFinishing: function (event, currentIndex) {
+
             form.validate().settings.ignore = ":disabled";
             //console.log(getCurrentIndex);
             return form.valid();
+          
         },
-        onFinished: function(event, currentIndex) {
+        onFinished: function (event, currentIndex) {
             angular.element('#cuestionario').scope().guardar();
             angular.element('#cuestionario').scope().$apply()
             //alert('Sumited');
@@ -128,7 +143,7 @@
     $('#button').click(function () {
         $("input[type='file']").trigger('click');
     })
-    
+
     $("input[type='file']").change(function () {
         $('#val').text(this.value.replace(/C:\\fakepath\\/i, ''))
     })
