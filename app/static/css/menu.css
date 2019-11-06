@@ -14,9 +14,13 @@
     width: 250px;
     height: 100%;
     overflow-y: auto;
-    background: #000;
-    padding-top: 15px;
+    background: #004482;
+    /*padding-top: 15px;*/
     transition: all 0.5s ease;
+    background: -webkit-linear-gradient(top, #004482, #42a5f5);
+    background: -o-linear-gradient(top, #004482, #42a5f5);
+    background: -moz-linear-gradient(top, #004482, #42a5f5);
+    background: linear-gradient(top, #004482, #42a5f5);
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -49,7 +53,7 @@
 
 .sidebar ul {
     margin: 0;
-    padding-left: 20px;
+    padding-left: 0px;
     list-style: none;
 }
 
@@ -61,7 +65,7 @@
     display: block;
     position: relative;
     text-decoration: none;
-    color: #999999;
+    color: #fff;
 }
 
 .sidebar ul li a [class*="icon"] {
@@ -70,8 +74,8 @@
 
 .sidebar ul li a#main-toggle:after,
 .sidebar ul li a.dropdown-toggle:after {
-    right: 20px;
-    bottom: 5px;
+    right: 10px;
+    top: 0px;
 }
 
 .sidebar .sidebar__main {
@@ -103,7 +107,7 @@
 }
 
 .sidebar__toggled {
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #55505033;
 }
 
 #main-toggle:after {
@@ -141,3 +145,82 @@
         margin-right: 50px;
     }
 }
+
+.container-menu {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.fondo-imagen {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    opacity: 0.1;
+}
+
+.logoAzul {
+    width: 60%;
+    height: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu-title {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.tab-link li a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 32px;
+    border-bottom: 1px solid #c6b8b84f;
+}
+
+.icono-menu {
+    float: right;
+    top: -2px;
+    right: -34px;
+    font-size: 23px;
+    color: #fff;
+}
+
+/*.sidebar ul li a.icono-menu:after,
+.sidebar ul li a.dropdown-toggle:after {
+    right: 10px;
+    top: 0px;
+}
+.icono-menu:after,
+.dropdown-toggle:after {
+    font-family: 'Glyphicons Halflings';
+    font-size: .7em;
+    position: absolute;
+    margin-left: .25em;
+    bottom: 0;
+    content: "\e114";
+}
+.icono-menu:after {
+    font-size: 1em;
+    content: "\e055";
+}*/
+/*.texto{
+   width:200px;
+   height:70px;
+   color: #000;
+   float:left;
+   position:relative;
+}
+.opacity{
+   background-color:rgb(255,0,0);
+   opacity: 0.2;
+   width:200px;
+   height:70px;
+   position:absolute;
+   top:0px;
+}*/
