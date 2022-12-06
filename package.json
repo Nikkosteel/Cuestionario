@@ -2,8 +2,8 @@
   "name": "centralizacion",
   "version": "0.1.0",
   "dependencies": {
-    "body-parser": "^1.9.2",
-    "express": "4.9.8",
+    "body-parser": "^1.20.1",
+    "express": "4.18.2",
     "mssql": "^3.1.2",
     "nodemailer": "^6.3.1",
     "serve-favicon": "^2.1.6",
